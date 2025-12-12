@@ -14,6 +14,11 @@ public class Operation {
     private String operationType;
     private double precio;
     private double cantidad;
+
+    @Override
+    public String toString() {
+        return "Operation: " + "agent: " + agent + ", operationType: " + operationType + ", precio: " + precio + ", cantidad:" + cantidad + ", activa:" + activa;
+    }
     private boolean activa;
 
     public Operation(AgentModel agent, String operationType, double precio, double cantidad, boolean activa) {

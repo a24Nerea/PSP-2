@@ -4,21 +4,46 @@
  */
 package view;
 
+import java.awt.List;
 import java.awt.event.ActionListener;
+import javax.swing.DefaultListModel;
+import model.AgentModel;
+import model.AgentSave;
 
 /**
  *
  * @author dam2_alu10@inf.ald
  */
 public class AgentJDialog extends javax.swing.JDialog {
-
+    private AgentSave save;
+    private DefaultListModel<String> listModel;
+    
     /**
      * Creates new form agentesJDialog
      */
-    public AgentJDialog(java.awt.Frame parent, boolean modal) {
+    public AgentJDialog(java.awt.Frame parent, boolean modal, AgentSave save) {
         super(parent, modal);
+        this.save = save;
         initComponents();
+        listModel = new DefaultListModel<>();
+        agentsJList.setModel(listModel);
+        cargarAgentes();
     }
+    
+    private void cargarAgentes(){
+        if(save != null && save.getAgentes() != null){
+            for(AgentModel agent : save.getAgentes()){
+                String datos = agent.getNombre() + " (ID: " + agent.getId() + ") - Saldo: " + agent.getSaldo() + "€";
+                listModel.addElement(datos);
+            }
+        }
+    }
+    
+    public void agregarAgenteAList(String id, String nombre, double saldo){
+        String item = nombre + " (ID: " + id + ") - Saldo: " + saldo + "€";
+        listModel.addElement(item);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,14 +174,22 @@ public class AgentJDialog extends javax.swing.JDialog {
         this.nameJTextField.setText(nombre);
     }
 
-    public float getPriceInicial() {
-        return Float.parseFloat(priceInicialJTextField.getText());
+    public double getPriceInicial() {
+        return Double.parseDouble(priceInicialJTextField.getText());
     }
 
-    public void setPriceInicial(Float saldoInicial) {
+    public void setPriceInicial(Double saldoInicial) {
         this.priceInicialJTextField.setText(saldoInicial.toString());
     }
 
+    public void addGuardarJButtonActionListener(ActionListener al){
+        this.saveJButton.addActionListener(al);
+    }
+    
+    public void addCancelarJButtonActionListener(ActionListener al){
+        this.cancelJButton.addActionListener(al);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel agentesJLabel;

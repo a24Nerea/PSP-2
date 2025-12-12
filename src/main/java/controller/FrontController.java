@@ -6,24 +6,34 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import model.AgentSave;
 import view.AgentJDialog;
 import view.MainFrame;
+import view.OperationJDialog;
 
 /**
  *
  * @author dam2_alu10@inf.ald
  */
 public class FrontController {
-    
+
     private MainFrame view;
+    private AgentSave save;
 
     public FrontController(MainFrame view) {
         this.view = view;
-        this.view.setQuitJMenu(this.setQuitJMenuActionListener());
-        this.view.setGestionAgentesJMenu(this.setGestionAgentesJMenu());
+        try {
+            this.save = new AgentSave();
+            this.view.setQuitJMenu(this.setQuitJMenuActionListener());
+            this.view.setGestionAgentesJMenu(this.setGestionAgentesJMenu());
+            this.view.setGestionCompraVentaJMenuItem(this.setGestionCompraVentaJMenuItem());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, "Error iniciando el sistema" + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
-    
-    public ActionListener setQuitJMenuActionListener(){
+
+    public ActionListener setQuitJMenuActionListener() {
         ActionListener al = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -33,19 +43,33 @@ public class FrontController {
         return al;
     }
     
-    public ActionListener setGestionAgentesJMenu(){
+    public ActionListener setGestionCompraVentaJMenuItem(){
         ActionListener al = new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
-                AgentJDialog ajd = new AgentJDialog(view, true);
-                AgentController ac = new AgentController(ajd);
-                ajd.setVisible(true);
-                
-            
+            public void actionPerformed(ActionEvent e) {
+                OperationJDialog ojd = new OperationJDialog(view);
+                OperationController opc = new OperationController(ojd, save);
+                ojd.setVisible(true);
             }
         };
         return al;
     }
-    
-    
+
+    public ActionListener setGestionAgentesJMenu() {
+        ActionListener al = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                try {
+                    AgentJDialog ajd = new AgentJDialog(view, true, save);
+                    AgentController ac = new AgentController(ajd, save);
+                    ajd.setVisible(true);
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(view, "Error al abrir dialogo agentes" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+        };
+        return al;
+    }
+
 }

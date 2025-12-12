@@ -90,6 +90,10 @@ public class MainFrame extends javax.swing.JFrame {
     public void setGestionAgentesJMenu(ActionListener al){
         this.gestionAgentesJMenuItem.addActionListener(al);
     }
+    
+    public void setGestionCompraVentaJMenuItem(ActionListener al){
+        this.gestionCompraVentaJMenuItem.addActionListener(al);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar MenuBar;
