@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.AgentSave;
+import model.Broker;
 import view.AgentJDialog;
 import view.MainFrame;
 import view.OperationJDialog;
@@ -19,6 +20,7 @@ import view.OperationJDialog;
 public class FrontController {
 
     private MainFrame view;
+    private Broker broker;
     private AgentSave save;
 
     public FrontController(MainFrame view) {
@@ -48,7 +50,7 @@ public class FrontController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 OperationJDialog ojd = new OperationJDialog(view);
-                OperationController opc = new OperationController(ojd, save);
+                OperationController opc = new OperationController(ojd, save, broker);
                 ojd.setVisible(true);
             }
         };

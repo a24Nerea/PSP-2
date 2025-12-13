@@ -15,19 +15,42 @@ public class AgentModel {
 
     private String id;
     private String nombre;
-    private double saldo;
+    private double saldoEfectivo;
+    private double accionesVender;
     private Operation operacionCompra;
     private Operation operacionVenta;
-   
-    public AgentModel() {
-        this.id = "";
-        this.nombre = "";
-        this.saldo = 0;
+
+    @Override
+    public String toString() {
+        return "AgentModel-> " + "id: " + id + ", nombre: " + nombre + ", saldoEfectivo: " + saldoEfectivo + ", accionesVender: " + accionesVender + ", operacionCompra: " + operacionCompra + ", operacionVenta: " + operacionVenta;
+    }
+
+    public AgentModel(String id, String nombre, double saldoIncio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.saldoEfectivo = saldoIncio;
+        this.accionesVender = 100.0;
         this.operacionCompra = null;
         this.operacionVenta = null;
     }
-    
-    
+
+    public AgentModel() {
+        this.id = "";
+        this.nombre = "";
+        this.saldoEfectivo = 100.0;
+        this.accionesVender = 100.0;
+        this.operacionCompra = null;
+        this.operacionVenta = null;
+    }
+
+    public boolean puedeVender(double cantidadAVender) {
+        return accionesVender >= cantidadAVender;
+    }
+
+    public boolean puedeComprar(double precio, double cantidadAComprar) {
+        double total = precio * cantidadAComprar;
+        return saldoEfectivo >= total;
+    }
 
     public String getId() {
         return id;
@@ -45,14 +68,6 @@ public class AgentModel {
         this.nombre = nombre;
     }
 
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
     public Operation getOperacionCompra() {
         return operacionCompra;
     }
@@ -67,6 +82,22 @@ public class AgentModel {
 
     public void setOperacionVenta(Operation operacionVenta) {
         this.operacionVenta = operacionVenta;
+    }
+
+    public double getSaldoEfectivo() {
+        return saldoEfectivo;
+    }
+
+    public void setSaldoEfectivo(double saldoEfectivo) {
+        this.saldoEfectivo = saldoEfectivo;
+    }
+
+    public double getAccionesVender() {
+        return accionesVender;
+    }
+
+    public void setAccionesVender(double accionesVender) {
+        this.accionesVender = accionesVender;
     }
     /*
     public boolean nuevaOperacionCompra(AgentModel this, String tipo, double limite, double cantidad) {

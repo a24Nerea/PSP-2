@@ -42,7 +42,7 @@ public class AgentSave {
 
     private void guardarAgentesFile(AgentModel agent) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true))) {
-            bw.write(agent.getId() + ";" + agent.getNombre() + ";" + agent.getSaldo());
+            bw.write(agent.getId() + ";" + agent.getNombre() + ";" + agent.getSaldoEfectivo() + ";" + agent.getAccionesVender());
             bw.newLine();
         } catch (IOException ex) {
             System.out.println("Error al guardar agentes: " + ex.getMessage());
@@ -62,7 +62,12 @@ public class AgentSave {
                     AgentModel agent = new AgentModel();
                     agent.setId(data[0]);
                     agent.setNombre(data[1]);
-                    agent.setSaldo(Double.parseDouble(data[2]));
+                    agent.setSaldoEfectivo(Double.parseDouble(data[2]));
+                    if (data.length >= 4) {
+                        agent.setAccionesVender(Double.parseDouble(data[3]));
+                    }else{
+                        agent.setAccionesVender(100.0);
+                    }
                     agents.add(agent);
                 }
             }
@@ -115,7 +120,7 @@ public class AgentSave {
         AgentModel nuevoAgente = new AgentModel();
         nuevoAgente.setId(id);
         nuevoAgente.setNombre(nombre);
-        nuevoAgente.setSaldo(saldo);
+        nuevoAgente.setSaldoEfectivo(saldo);
 
         addAgent(nuevoAgente);
         return true;

@@ -5,6 +5,7 @@
 package view;
 
 import java.awt.event.ActionListener;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -50,7 +51,7 @@ public class OperationJDialog extends javax.swing.JDialog {
 
         jLabel3.setText("Tipo Operacion: ");
 
-        jLabel4.setText("Precio Límite:");
+        jLabel4.setText("Precio:");
 
         jLabel5.setText("Cantidad:");
 
@@ -135,16 +136,16 @@ public class OperationJDialog extends javax.swing.JDialog {
         this.tipoOperacionJComboBox.addItem(item);
     }
 
-    public String getPrecioLimiteJTextField() {
-        return this.precioLimiteJTextField.getText();
+    public double getPrecioLimiteJTextField() {
+        return Double.parseDouble(this.precioLimiteJTextField.getText());
     }
     
     public void setPrecioLimiteJTextField(double precio){
         this.precioLimiteJTextField.setText(Double.toString(precio));
     }
     
-    public String getCantidadJTextField(){
-        return this.cantidadJTextField.getText();
+    public double getCantidadJTextField(){
+        return Double.parseDouble(this.cantidadJTextField.getText());
     }
 
     public void setCantidadJTextField(double cantidad){
@@ -158,6 +159,11 @@ public class OperationJDialog extends javax.swing.JDialog {
     public void addCancelarJButtonActionListener(ActionListener al){
         this.cancelarJButton.addActionListener(al);
     }
+    
+    public JComboBox<String> getAgentsJCombobox(){
+        return this.agentJComboBox;
+    }
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> agentJComboBox;
