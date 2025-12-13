@@ -91,6 +91,8 @@ public class OperationController {
                     if (agenteSeleccion.getOperacionCompra() != null) {
                         int respuesta = JOptionPane.showConfirmDialog(view, "Este agente tiene orden de compra activada: \n" + "Precio: " + agenteSeleccion.getOperacionCompra().getPrecio() + "€ \n" + "Cantidad: " + agenteSeleccion.getOperacionCompra().getCantidad() + "¿Quiere reemplazar la operacion?", "Compra ya existente", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION);
                         if (respuesta != JOptionPane.YES_OPTION) {
+                            broker.cancelarOperacionCompra(agenteSeleccion);
+                        }else{
                             return;
                         }
                     }
@@ -102,6 +104,8 @@ public class OperationController {
                     if (agenteSeleccion.getOperacionVenta() != null) {
                         int respuesta = JOptionPane.showConfirmDialog(view, "Este agente tiene orden de venta activada: \n" + "Precio: " + agenteSeleccion.getOperacionVenta().getPrecio() + "€ \n" + "Cantidad: " + agenteSeleccion.getOperacionVenta().getCantidad() + "\n" + "¿Quiere reemplazar la operacion?", "Venta ya existente", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION);
                         if (respuesta != JOptionPane.YES_OPTION) {
+                            broker.cancelarOperacionVenta(agenteSeleccion);
+                        }else{
                             return;
                         }
                     }

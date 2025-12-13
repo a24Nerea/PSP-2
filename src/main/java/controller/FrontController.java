@@ -23,8 +23,9 @@ public class FrontController {
     private Broker broker;
     private AgentSave save;
 
-    public FrontController(MainFrame view) {
+    public FrontController(MainFrame view, Broker broker) {
         this.view = view;
+        this.broker = broker;
         try {
             this.save = new AgentSave();
             this.view.setQuitJMenu(this.setQuitJMenuActionListener());

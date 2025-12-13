@@ -4,6 +4,7 @@
 package com.mycompany.proyectoud2;
 
 import controller.FrontController;
+import model.Broker;
 import view.MainFrame;
 
 /**
@@ -25,8 +26,11 @@ public class ProyectoUD2 {
         //crear operaciones
         //guardar usuarios y operaciones
         
+        Broker brooker = new Broker(100.0);
         MainFrame mainFrame = new MainFrame();
-        FrontController fc = new FrontController(mainFrame);
+        FrontController fc = new FrontController(mainFrame, brooker);
+        brooker.iniciar();
         mainFrame.setVisible(true);
+        System.out.println("Iniciando");
     }
 }
