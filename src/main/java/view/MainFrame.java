@@ -4,7 +4,10 @@
  */
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
+import javax.swing.JPanel;
+import model.Broker;
 
 /**
  *
@@ -15,10 +18,22 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    public MainFrame(Broker broker) {
         initComponents();
+        pintarGrafica(broker);
     }
-
+    
+    private void pintarGrafica(Broker broker){
+        graficJPanel.removeAll();
+        Grafica grafica = new Grafica(broker);
+        broker.grafica(grafica);
+        graficJPanel.setLayout(new BorderLayout());
+        graficJPanel.add(grafica, BorderLayout.CENTER);
+        graficJPanel.revalidate();
+        graficJPanel.repaint();
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

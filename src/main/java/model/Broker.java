@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import view.Grafica;
 
 /**
  *
@@ -20,9 +21,13 @@ public class Broker {
     private List<Operation> compras;
     private List<Operation> ventas;
     private List<Double> todosLosPrecios;
-
     private Thread hiloMotor;
     private boolean motorActivo;
+    private Grafica grafica;
+
+    public void grafica(Grafica grafica) {
+        this.grafica = grafica;
+    }
 
     public Broker(double precioActual) {
         this.precioActual = precioActual;
@@ -59,13 +64,17 @@ public class Broker {
         System.out.println("[TRANSACCION] Total: " + total + " €");
 
         System.out.println("[ANTES] Comprador - Saldo: " + comprador.getSaldoEfectivo() + " €, Acciones: " + comprador.getAccionesVender());
-        System.out.println("[ANTES] Vendedor - Saldo: " + vendedor.getSaldoEfectivo()+ " €, Acciones: " + vendedor.getAccionesVender());
+        System.out.println("[ANTES] Vendedor - Saldo: " + vendedor.getSaldoEfectivo() + " €, Acciones: " + vendedor.getAccionesVender());
 
         vendedor.setSaldoEfectivo(vendedor.getSaldoEfectivo() + total); //precio al vendedor
         comprador.setAccionesVender(comprador.getAccionesVender() + cantidad); //acciones al comprado
 
+        if (grafica != null) {
+            grafica.actualizarGrafica();
+        }
+
         System.out.println("[DESPUES] Comprador - Saldo: " + comprador.getSaldoEfectivo() + " €, Acciones: " + comprador.getAccionesVender());
-        System.out.println("[DESPUES] Vendedor - Saldo: " + vendedor.getSaldoEfectivo()+ " €, Acciones: " + vendedor.getAccionesVender());
+        System.out.println("[DESPUES] Vendedor - Saldo: " + vendedor.getSaldoEfectivo() + " €, Acciones: " + vendedor.getAccionesVender());
         System.out.println("=== TRANSACCION COMPLETADA ===\n");
 
     }
@@ -149,32 +158,32 @@ public class Broker {
         hiloMotor.start();
         System.out.println("[BROKER] Motor iniciado (procesa cada 3 segundos)");
     }
-    
-    public synchronized void cancelarOperacionCompra(AgentModel agente){
+
+    public synchronized void cancelarOperacionCompra(AgentModel agente) {
         Operation eliminarOperacion = null;
-        for(Operation compra: compras){
-            if(compra.getAgent().equals(agente)){
+        for (Operation compra : compras) {
+            if (compra.getAgent().equals(agente)) {
                 eliminarOperacion = compra;
                 break;
             }
         }
-        if(eliminarOperacion != null){
+        if (eliminarOperacion != null) {
             compras.remove(eliminarOperacion);
             double saldo = eliminarOperacion.getPrecio() * eliminarOperacion.getCantidad();
             agente.setSaldoEfectivo(agente.getSaldoEfectivo() + saldo);
             agente.setOperacionCompra(null);
         }
     }
-    
-    public synchronized void cancelarOperacionVenta(AgentModel agentes){
+
+    public synchronized void cancelarOperacionVenta(AgentModel agentes) {
         Operation eliminarOperacion = null;
-        for(Operation venta: ventas){
-            if(venta.getAgent().equals(agentes)){
-                eliminarOperacion =venta;
+        for (Operation venta : ventas) {
+            if (venta.getAgent().equals(agentes)) {
+                eliminarOperacion = venta;
                 break;
             }
         }
-        if(eliminarOperacion!=null){
+        if (eliminarOperacion != null) {
             ventas.remove(eliminarOperacion);
             agentes.setAccionesVender(agentes.getAccionesVender() + eliminarOperacion.getCantidad());
             agentes.setOperacionVenta(null);
@@ -182,6 +191,7 @@ public class Broker {
     }
 
     public double getPrecioActual() {
+        System.out.println("[BROKER] getPrecioActual() llamado, valor: " + precioActual);
         return precioActual;
     }
 

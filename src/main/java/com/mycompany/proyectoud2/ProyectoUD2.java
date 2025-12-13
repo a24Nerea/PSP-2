@@ -27,7 +27,7 @@ public class ProyectoUD2 {
         //guardar usuarios y operaciones
         
         Broker brooker = new Broker(100.0);
-        MainFrame mainFrame = new MainFrame();
+        MainFrame mainFrame = new MainFrame(brooker);
         FrontController fc = new FrontController(mainFrame, brooker);
         brooker.iniciar();
         mainFrame.setVisible(true);
