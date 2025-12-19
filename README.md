@@ -14,7 +14,9 @@ En la ventana principal tenemos que hacer click en el menú que pone "Broker", a
 
 ![Peticion1](/imagenesReadme/gestionAgentesPestaña.bmp)
 
-Una vez hagamos click nos aparecerá como la imagen que dejo a continuación. Aquí debemos introducir los datos correctamente, si nos equivocamos y dejamos algún campo vacío, duplicamos algún nombre o ID la aplicación nos avisará. Además, en la ventana aparecerá una lista de los agentes que añadas o los que añadiste en un pasado.
+Una vez hagamos click nos aparecerá como la imagen que dejo a continuación. Aquí debemos introducir los datos correctamente, si nos equivocamos y dejamos algún campo vacío, duplicamos algún nombre o ID la aplicación nos avisará. Además, en la ventana aparecerá una lista de los agentes que añadas o los que añadiste en un pasado. 
+
+![Peticion1](/imagenesReadme/gestionAgentesVentana.bmp)
 
 ## Operación compra-venta
 
