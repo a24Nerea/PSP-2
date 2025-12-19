@@ -20,7 +20,7 @@ Una vez hagamos click nos aparecerá como la imagen que dejo a continuación. Aq
 
 ## Operación compra-venta
 
-Para poder abrir la ventana de las operaciones, volvemos a la ventana principal y le damos al menú de broker, como indico anteriormente, y seleccionamos la opción de operaciones:
+Para poder abrir la ventana de las operaciones, volvemos a la ventana principal y le damos al menú de broker, como indiqué anteriormente, y seleccionamos la opción de operaciones:
 
 ![Peticion1](/imagenesReadme/gestionOperaciones.bmp)
 
