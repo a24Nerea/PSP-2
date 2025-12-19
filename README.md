@@ -1,13 +1,22 @@
 # Proyecto 2 Broker de bolsa
 # Índice
 - [Descripción](#descripción)
-- [Creación de agentes](#como-crear-agentes)
+- [Creación de agentes](#crear-agentes)
 
 
 
 # Descripción
 El siguiente proyecto simula una compra y venta de acciones de determinados agentes. En una de las ventanas de la aplicación se puede introducir nuevos agentes, con id, nombre y un saldo inicial. En otra de ellas se pueden realizar dichas operaciones seleccionando el agente, y la compra o venta que quieras realizar, así como, introducir el precio y la cantidad. Además, contiene una gráfica que se va cambiando en tiempo real según las operaciones que se realicen
 
-## Como crear agentes 
+## Crear Agentes
+En la ventana principal tenemos que hacer click en el menú que pone "Broker", allí nos saldrán varios menús donde nos aparecerá las diferentes ventanas que contiene la aplicación. En este caso le daremos a la opción de Gestionar Agentes
+
+![Peticion1](/imagenesReadme/gestionAgentesPestaña.bmp)
+
+ Una vez hagamos click nos aparecerá como la imagen que dejo a continuación. Aquí debemos introducir los datos correctamente, si nos equivocamos y dejamos algún campo vacío, duplicamos algún nombre o ID la aplicación nos avisará. Además, en la ventana aparecerá una lista de los agentes que añadas o los que añadiste en un pasado.
+
+![Peticion1](/imagenesReadme/gestionAgentesVentana.bmp)
+
+##
 
 
