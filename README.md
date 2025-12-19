@@ -2,7 +2,7 @@
 # Índice
 - [Descripción](#descripción)
 - [Creación de agentes](#crear-agentes)
-- [Operacion de Compra y Venta](#operacion-compra-venta)
+- [Operacion de Compra y Venta](#operación-compra-venta)
 
 
 
