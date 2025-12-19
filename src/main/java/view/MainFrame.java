@@ -10,30 +10,51 @@ import javax.swing.JPanel;
 import model.Broker;
 
 /**
+ * Clase donde se crea la vista principal de la aplicación
  *
  * @author dam2_alu10@inf.ald
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    public Grafica graficaActual;
+
     /**
-     * Creates new form MainFrame
+     * Contructor
+     *
+     * @param broker
      */
     public MainFrame(Broker broker) {
         initComponents();
         pintarGrafica(broker);
     }
-    
-    private void pintarGrafica(Broker broker){
+
+    /**
+     * Método donde se pinta la gráfica en el panel
+     *
+     * @param broker
+     */
+    private void pintarGrafica(Broker broker) {
         graficJPanel.removeAll();
         Grafica grafica = new Grafica(broker);
+        this.graficaActual = grafica;
         broker.grafica(grafica);
         graficJPanel.setLayout(new BorderLayout());
         graficJPanel.add(grafica, BorderLayout.CENTER);
         graficJPanel.revalidate();
         graficJPanel.repaint();
     }
-    
-    
+
+    /**
+     * Método donde se para el hilo al cerrar la ventana
+     */
+    @Override
+    public void dispose() {
+        if (graficaActual != null) {
+            graficaActual.pararHiloDeGrafica();
+        }
+        super.dispose();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,15 +119,30 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setQuitJMenu(ActionListener al){
+    /**
+     * Método para añadir ActionListener al botón Salir
+     *
+     * @param al
+     */
+    public void setQuitJMenu(ActionListener al) {
         this.quitJMenuItem.addActionListener(al);
     }
-    
-    public void setGestionAgentesJMenu(ActionListener al){
+
+    /**
+     * Método para añadir ActionListener al botón Gestión de agentes
+     *
+     * @param al
+     */
+    public void setGestionAgentesJMenu(ActionListener al) {
         this.gestionAgentesJMenuItem.addActionListener(al);
     }
-    
-    public void setGestionCompraVentaJMenuItem(ActionListener al){
+
+    /**
+     * Método para añadir ActionListener al botón Gestión de compra/venta
+     *
+     * @param al
+     */
+    public void setGestionCompraVentaJMenuItem(ActionListener al) {
         this.gestionCompraVentaJMenuItem.addActionListener(al);
     }
 

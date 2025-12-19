@@ -12,6 +12,7 @@ import model.AgentSave;
 import view.AgentJDialog;
 
 /**
+ * Clase donde gestionamos la vista de los Agentes
  *
  * @author dam2_alu10@inf.ald
  */
@@ -21,6 +22,12 @@ public class AgentController {
     private FrontController parentController;
     public AgentSave save;
 
+    /**
+     * Constructor para la clase principal
+     *
+     * @param view
+     * @param save
+     */
     public AgentController(AgentJDialog view, AgentSave save) {
         this.view = view;
         this.save = save;
@@ -28,12 +35,20 @@ public class AgentController {
         this.view.addGuardarJButtonActionListener(this.getAddGuardarJButtonActionListener());
     }
 
+    /**
+     * Método que se usa para borrar campos una vez guardados los datos
+     */
     public void limpiarCampos() {
         view.setIdTextFiedl("");
         view.setNameJTextField("");
         view.setPriceInicial(Double.parseDouble("0.0"));
     }
 
+    /**
+     * ActionListener para el botón de guardar
+     *
+     * @return
+     */
     public ActionListener getAddGuardarJButtonActionListener() {
         ActionListener al = new ActionListener() {
             @Override
@@ -46,7 +61,7 @@ public class AgentController {
                     JOptionPane.showMessageDialog(view, "Completa los campos", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
-                
+
                 if (saldo < 0) {
                     JOptionPane.showMessageDialog(view, "El saldo no puede ser negativo", "Saldo negativo", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -71,6 +86,11 @@ public class AgentController {
         return al;
     }
 
+    /**
+     * ActionListener para el botón de cancelar
+     *
+     * @return
+     */
     public ActionListener getAddCancelarJButtonActionListener() {
         ActionListener al = new ActionListener() {
             @Override

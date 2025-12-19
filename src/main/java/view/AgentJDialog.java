@@ -11,15 +11,21 @@ import model.AgentModel;
 import model.AgentSave;
 
 /**
+ * Vista para añadir a los agentes
  *
  * @author dam2_alu10@inf.ald
  */
 public class AgentJDialog extends javax.swing.JDialog {
+
     private AgentSave save;
     private DefaultListModel<String> listModel;
-    
+
     /**
-     * Creates new form agentesJDialog
+     * Contructor de la vista
+     *
+     * @param parent
+     * @param modal
+     * @param save
      */
     public AgentJDialog(java.awt.Frame parent, boolean modal, AgentSave save) {
         super(parent, modal);
@@ -29,21 +35,32 @@ public class AgentJDialog extends javax.swing.JDialog {
         agentsJList.setModel(listModel);
         cargarAgentes();
     }
-    
-    private void cargarAgentes(){
-        if(save != null && save.getAgentes() != null){
-            for(AgentModel agent : save.getAgentes()){
-                String datos = agent.getNombre() + " (ID: " + agent.getId() + ") - Saldo: " + agent.getSaldoEfectivo()+ "€";
+
+    /**
+     * Método que carga los agentes existentes desde el sistema de persistencia
+     *
+     *
+     */
+    private void cargarAgentes() {
+        if (save != null && save.getAgentes() != null) {
+            for (AgentModel agent : save.getAgentes()) {
+                String datos = agent.getNombre() + " (ID: " + agent.getId() + ") - Saldo: " + agent.getSaldoEfectivo() + "€";
                 listModel.addElement(datos);
             }
         }
     }
-    
-    public void agregarAgenteAList(String id, String nombre, double saldo){
+
+    /**
+     * Método que agrega agentes a la lista
+     *
+     * @param id
+     * @param nombre
+     * @param saldo
+     */
+    public void agregarAgenteAList(String id, String nombre, double saldo) {
         String item = nombre + " (ID: " + id + ") - Saldo: " + saldo + "€";
         listModel.addElement(item);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,47 +166,96 @@ public class AgentJDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Set que estable el actionListenes del boton de guardar
+     *
+     * @param al
+     */
     public void setSaveJButton(ActionListener al) {
         this.saveJButton.addActionListener(al);
     }
 
+    /**
+     * Set que estable el ActionListener del boton de cancelar
+     *
+     * @param al
+     */
     public void setCancelJButton(ActionListener al) {
         this.cancelJButton.addActionListener(al);
     }
 
+    /**
+     * Get que establece el texto al campo ID
+     *
+     * @return
+     */
     public String getIdTextField() {
         return idJTextField.getText();
     }
 
+    /**
+     * Set que establece el ID al campo
+     *
+     * @param id
+     */
     public void setIdTextFiedl(String id) {
         this.idJTextField.setText(id);
     }
 
+    /**
+     * Get que devuelve el nombre al campo name
+     *
+     * @return
+     */
     public String getNameJTextField() {
         return nameJTextField.getText();
     }
 
+    /**
+     * Set que estable el nombre en el campo name
+     *
+     * @param nombre
+     */
     public void setNameJTextField(String nombre) {
         this.nameJTextField.setText(nombre);
     }
 
+    /**
+     * Get que devuelve el precio inicial introducido en el campo
+     *
+     * @return
+     */
     public double getPriceInicial() {
         return Double.parseDouble(priceInicialJTextField.getText());
     }
 
+    /**
+     * Set que estable el precio inicial en el campo
+     *
+     * @param saldoInicial
+     */
     public void setPriceInicial(Double saldoInicial) {
         this.priceInicialJTextField.setText(saldoInicial.toString());
     }
 
-    public void addGuardarJButtonActionListener(ActionListener al){
+    /**
+     * ActionListener establecido para el boton guardar
+     *
+     * @param al
+     */
+    public void addGuardarJButtonActionListener(ActionListener al) {
         this.saveJButton.addActionListener(al);
     }
-    
-    public void addCancelarJButtonActionListener(ActionListener al){
+
+    /**
+     * ActionListenes establecido para el boton cancelar
+     *
+     * @param al
+     */
+    public void addCancelarJButtonActionListener(ActionListener al) {
         this.cancelJButton.addActionListener(al);
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel agentesJLabel;

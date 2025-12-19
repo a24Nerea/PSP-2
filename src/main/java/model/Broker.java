@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import view.Grafica;
 
 /**
+ * Modelo que se usa como motor principal
  *
  * @author nerea
  */
@@ -25,10 +26,20 @@ public class Broker {
     private boolean motorActivo;
     private Grafica grafica;
 
+    /**
+     * Método donde se estable una referencia a la gráfica
+     *
+     * @param grafica
+     */
     public void grafica(Grafica grafica) {
         this.grafica = grafica;
     }
 
+    /**
+     * Contructor del motor principal
+     *
+     * @param precioActual
+     */
     public Broker(double precioActual) {
         this.precioActual = precioActual;
         this.compras = new ArrayList<>();
@@ -39,6 +50,11 @@ public class Broker {
         System.out.println("[BROKER] Creado, precio inicial: " + precioActual + " €");
     }
 
+    /**
+     * Método que añade una nueva operación
+     *
+     * @param operacion
+     */
     public synchronized void conseguirOperacionBroker(Operation operacion) {
         if (operacion.getOperationType().equals("Compra")) {
             compras.add(operacion);
@@ -50,6 +66,14 @@ public class Broker {
         System.out.println("[BROKER] Estado operacion: " + compras.size() + " compras, " + ventas.size() + " ventas pendientes");
     }
 
+    /**
+     * Método que ejecuta una transaccion
+     *
+     * @param compra
+     * @param venta
+     * @param cantidad
+     * @param precio
+     */
     public void transaccion(Operation compra, Operation venta, double cantidad, double precio) {
 
         AgentModel comprador = compra.getAgent();
@@ -79,6 +103,13 @@ public class Broker {
 
     }
 
+    /**
+     * Método que actualiza una orden después de una completa transacción
+     *
+     * @param compra
+     * @param venta
+     * @param cantidad
+     */
     public void actualizarOdern(Operation compra, Operation venta, double cantidad) {
         System.out.println("[BROKER] Actualiza orden  despues de una transacción...");
         double cantidadCompra = compra.getCantidad() - cantidad;
@@ -102,6 +133,9 @@ public class Broker {
         System.out.println("[BROKER] Actualiza estado final: " + compras.size() + " compras, " + ventas.size() + " ventas pendientes");
     }
 
+    /**
+     * Método que procesa ordenes que están pendientes
+     */
     public void procesandoOrden() {
         System.out.println("\n[BROKER] Procesando ordenes...");
         if (compras.isEmpty() || ventas.isEmpty()) {
@@ -132,6 +166,9 @@ public class Broker {
         System.out.println("[BROKER] No se encontraron coincidencias de precios");
     }
 
+    /**
+     * Inicia el hilo del broker
+     */
     public void iniciar() {
         if (motorActivo) {
             System.out.println("[BROKER] Motor ya esta activo");
@@ -159,6 +196,11 @@ public class Broker {
         System.out.println("[BROKER] Motor iniciado (procesa cada 3 segundos)");
     }
 
+    /**
+     * Método que cancela una operacion de compra
+     *
+     * @param agente
+     */
     public synchronized void cancelarOperacionCompra(AgentModel agente) {
         Operation eliminarOperacion = null;
         for (Operation compra : compras) {
@@ -175,6 +217,11 @@ public class Broker {
         }
     }
 
+    /**
+     * Método que cancela una operacion de venta
+     *
+     * @param agentes
+     */
     public synchronized void cancelarOperacionVenta(AgentModel agentes) {
         Operation eliminarOperacion = null;
         for (Operation venta : ventas) {
@@ -190,51 +237,111 @@ public class Broker {
         }
     }
 
+    /**
+     * Get que devuelve el precio actual
+     *
+     * @return
+     */
     public double getPrecioActual() {
         System.out.println("[BROKER] getPrecioActual() llamado, valor: " + precioActual);
         return precioActual;
     }
 
+    /**
+     * Set que establece el precio actual
+     *
+     * @param precioActual
+     */
     public void setPrecioActual(double precioActual) {
         this.precioActual = precioActual;
     }
 
+    /**
+     * Get que devuelve la lista de compras
+     *
+     * @return
+     */
     public List<Operation> getCompras() {
         return compras;
     }
 
+    /**
+     * Set que establece la lista de compras
+     *
+     * @param compras
+     */
     public void setCompras(List<Operation> compras) {
         this.compras = compras;
     }
 
+    /**
+     * Get que devuelve la lista de ventas
+     *
+     * @return
+     */
     public List<Operation> getVentas() {
         return ventas;
     }
 
+    /**
+     * Set que establece la lista de ventas
+     *
+     * @param ventas
+     */
     public void setVentas(List<Operation> ventas) {
         this.ventas = ventas;
     }
 
+    /**
+     * Get que devuelve la lista de todos los precios
+     *
+     * @return
+     */
     public List<Double> getTodosLosPrecios() {
         return todosLosPrecios;
     }
 
+    /**
+     * Set que establece la lista de todos los precios
+     *
+     * @param todosLosPrecios
+     */
     public void setTodosLosPrecios(List<Double> todosLosPrecios) {
         this.todosLosPrecios = todosLosPrecios;
     }
 
+    /**
+     * Get que devuelve el hilo
+     *
+     * @return
+     */
     public Thread getHiloMotor() {
         return hiloMotor;
     }
 
+    /**
+     * Set que establece el hilo
+     *
+     * @param hiloMotor
+     */
     public void setHiloMotor(Thread hiloMotor) {
         this.hiloMotor = hiloMotor;
     }
 
+    /**
+     * Método que devuelve true si el motor esta activo, false si no lo está
+     *
+     * @return
+     */
     public boolean isMotorActivo() {
         return motorActivo;
     }
 
+    /**
+     * Método que estable true o false al motor activo
+     *
+     * @param motorActivo
+     */
     public void setMotorActivo(boolean motorActivo) {
         this.motorActivo = motorActivo;
     }

@@ -17,6 +17,7 @@ import model.OperationSave;
 import view.OperationJDialog;
 
 /**
+ * Controlador para gestionar las operaciones
  *
  * @author nerea
  */
@@ -27,6 +28,13 @@ public class OperationController {
     private OperationSave operation;
     private Broker broker;
 
+    /**
+     * Constructor de la clase
+     *
+     * @param view
+     * @param agentSave
+     * @param broker
+     */
     public OperationController(OperationJDialog view, AgentSave agentSave, Broker broker) {
         this.view = view;
         this.agentSave = agentSave;
@@ -37,12 +45,18 @@ public class OperationController {
         this.view.addGuardarJButtonActionListener(this.getAddGuardarJButtonActionListener());
     }
 
+    /**
+     * Método donde se inician los componentes
+     */
     public void initComponents() {
         cargarAgentes();
         view.setTipoOperacionJComboBox("Compra");
         view.setTipoOperacionJComboBox("Venta");
     }
 
+    /**
+     * Método donde cargamos los agentes guardados en el comboBox
+     */
     public void cargarAgentes() {
         if (agentSave != null && agentSave.getAgentes() != null) {
             for (AgentModel agent : agentSave.getAgentes()) {
@@ -54,6 +68,11 @@ public class OperationController {
         }
     }
 
+    /**
+     * ActionListenes para el boton guardar
+     *
+     * @return
+     */
     public ActionListener getAddGuardarJButtonActionListener() {
         ActionListener al = new ActionListener() {
             @Override
@@ -92,7 +111,7 @@ public class OperationController {
                         int respuesta = JOptionPane.showConfirmDialog(view, "Este agente tiene orden de compra activada: \n" + "Precio: " + agenteSeleccion.getOperacionCompra().getPrecio() + "€ \n" + "Cantidad: " + agenteSeleccion.getOperacionCompra().getCantidad() + "¿Quiere reemplazar la operacion?", "Compra ya existente", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION);
                         if (respuesta != JOptionPane.YES_OPTION) {
                             broker.cancelarOperacionCompra(agenteSeleccion);
-                        }else{
+                        } else {
                             return;
                         }
                     }
@@ -105,7 +124,7 @@ public class OperationController {
                         int respuesta = JOptionPane.showConfirmDialog(view, "Este agente tiene orden de venta activada: \n" + "Precio: " + agenteSeleccion.getOperacionVenta().getPrecio() + "€ \n" + "Cantidad: " + agenteSeleccion.getOperacionVenta().getCantidad() + "\n" + "¿Quiere reemplazar la operacion?", "Venta ya existente", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION);
                         if (respuesta != JOptionPane.YES_OPTION) {
                             broker.cancelarOperacionVenta(agenteSeleccion);
-                        }else{
+                        } else {
                             return;
                         }
                     }
@@ -116,15 +135,15 @@ public class OperationController {
                 broker.conseguirOperacionBroker(operacion);
                 if (tipoOperacion.equals("Compra")) {
                     agenteSeleccion.setOperacionCompra(operacion);
-                }else{
+                } else {
                     agenteSeleccion.setOperacionVenta(operacion);
                 }
                 boolean guardar = operation.guardarOperacion(operacion);
-                if(guardar){
+                if (guardar) {
                     JOptionPane.showMessageDialog(view, "Orden registrada: \n" + "Agente: " + agenteSeleccion.getNombre() + "\n" + "Id: " + agenteSeleccion.getId() + "\n" + "Tipo: " + tipoOperacion + "\n" + "Cantidad: " + cantidad + "\n" + "Orden Registrada", "Operacion realizada", JOptionPane.INFORMATION_MESSAGE);
                     view.setCantidadJTextField(0);
                     view.setPrecioLimiteJTextField(0);
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(view, "Error al guardar en archivo", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -132,6 +151,11 @@ public class OperationController {
         return al;
     }
 
+    /**
+     * ActionListener para el botón Cancelar
+     *
+     * @return
+     */
     public ActionListener getAddCancelarJButtonActionListener() {
         ActionListener al = new ActionListener() {
             @Override

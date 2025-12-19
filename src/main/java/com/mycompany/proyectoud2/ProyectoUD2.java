@@ -8,12 +8,14 @@ import model.Broker;
 import view.MainFrame;
 
 /**
+ * Clase main donde se inica el broker junto con el mainFrame
  *
  * @author dam2_alu10@inf.ald
  */
 public class ProyectoUD2 {
 //hilosBroker
     //en el main tener la gráfica 
+
     public static void main(String[] args) {
         //tenemos que recuperar el precio y los valores anteriores
         //pintar el precio/tiempo -> Interfaz gráfica
@@ -25,7 +27,6 @@ public class ProyectoUD2 {
         //nuevos agentes 
         //crear operaciones
         //guardar usuarios y operaciones
-        
         Broker brooker = new Broker(100.0);
         MainFrame mainFrame = new MainFrame(brooker);
         FrontController fc = new FrontController(mainFrame, brooker);

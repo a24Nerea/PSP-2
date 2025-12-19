@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Clase que guarda las operaciones de cada agente
  *
  * @author nerea
  */
@@ -24,12 +25,22 @@ public class OperationSave {
     private AgentSave agente;
     private final String fileName = "operaciones.txt";
 
+    /**
+     * Constructor principal
+     *
+     * @param agent
+     */
     public OperationSave(AgentSave agent) {
         this.agente = agent;
         this.operaciones = new ArrayList<>();
         cargarOperaciones();
     }
 
+    /**
+     * Método donde se cargan las operaciones
+     *
+     * @param agent
+     */
     private void cargarOperaciones() {
         File file = new File(fileName);
         if (!file.exists()) {
@@ -53,6 +64,12 @@ public class OperationSave {
         }
     }
 
+    /**
+     * Método donde se guardan las operaciones en el fichero
+     *
+     * @param operacion
+     * @return
+     */
     public boolean guardarOperacion(Operation operacion) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true))) {
             String linea = operacion.getAgent().getId() + ";" + operacion.getOperationType() + ";" + operacion.getPrecio() + ";" + operacion.getCantidad() + ";" + operacion.isActiva();
@@ -65,12 +82,22 @@ public class OperationSave {
         }
         return false;
     }
-    
-    public ArrayList<Operation> getOperaciones(){
+
+    /**
+     * Get que devuelve la lista de operaciones
+     *
+     * @return
+     */
+    public ArrayList<Operation> getOperaciones() {
         return operaciones;
     }
-    
-    
+
+    /**
+     * Método para encontrar el agente según el id
+     *
+     * @param id
+     * @return
+     */
     public AgentModel encontrarAgente(String id) {
         for (AgentModel agente : agente.getAgentes()) {
             if (agente.getId().equals(id)) {

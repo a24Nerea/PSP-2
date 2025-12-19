@@ -14,6 +14,7 @@ import view.MainFrame;
 import view.OperationJDialog;
 
 /**
+ * Controlador para la ventana principal
  *
  * @author dam2_alu10@inf.ald
  */
@@ -23,6 +24,12 @@ public class FrontController {
     private Broker broker;
     private AgentSave save;
 
+    /**
+     * Constructor de la clase
+     *
+     * @param view
+     * @param broker
+     */
     public FrontController(MainFrame view, Broker broker) {
         this.view = view;
         this.broker = broker;
@@ -36,6 +43,11 @@ public class FrontController {
         }
     }
 
+    /**
+     * ActionListener para el botón salir
+     *
+     * @return
+     */
     public ActionListener setQuitJMenuActionListener() {
         ActionListener al = new ActionListener() {
             @Override
@@ -45,8 +57,13 @@ public class FrontController {
         };
         return al;
     }
-    
-    public ActionListener setGestionCompraVentaJMenuItem(){
+
+    /**
+     * ActionListener para el botón menú para gestionar compras y ventas
+     *
+     * @return
+     */
+    public ActionListener setGestionCompraVentaJMenuItem() {
         ActionListener al = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,6 +75,11 @@ public class FrontController {
         return al;
     }
 
+    /**
+     * ActionListener para introducir nuevos Agentes
+     *
+     * @return
+     */
     public ActionListener setGestionAgentesJMenu() {
         ActionListener al = new ActionListener() {
             @Override
@@ -66,7 +88,7 @@ public class FrontController {
                     AgentJDialog ajd = new AgentJDialog(view, true, save);
                     AgentController ac = new AgentController(ajd, save);
                     ajd.setVisible(true);
-                }catch(Exception e){
+                } catch (Exception e) {
                     JOptionPane.showMessageDialog(view, "Error al abrir dialogo agentes" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
 

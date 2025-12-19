@@ -8,13 +8,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 
 /**
+ * Clase para la vista de las operaciones
  *
  * @author dam2_alu10@inf.ald
  */
 public class OperationJDialog extends javax.swing.JDialog {
 
     /**
-     * Creates new form operacionesJDialog
+     * Contructor
+     *
+     * @param parent
      */
     public OperationJDialog(java.awt.Frame parent) {
         super(parent, true);
@@ -120,51 +123,106 @@ public class OperationJDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Get que devuelve el agente seleccionado
+     *
+     * @return
+     */
     public String getAgentJComboBox() {
         return agentJComboBox.getSelectedItem().toString();
     }
 
+    /**
+     * Set donde se añade un agente al ComboBox
+     *
+     * @param item
+     */
     public void setAgentJComboBox(String item) {
         this.agentJComboBox.addItem(item);
     }
 
+    /**
+     * Get que devuelve el tipo de operación seleccionado
+     *
+     * @return
+     */
     public String getTipoOperacionJComboBox() {
         return tipoOperacionJComboBox.getSelectedItem().toString();
     }
 
+    /**
+     * Set donde se añade un tipo de operación al ComboBox
+     *
+     * @param item
+     */
     public void setTipoOperacionJComboBox(String item) {
         this.tipoOperacionJComboBox.addItem(item);
     }
 
+    /**
+     * Get que devuelve el precio límite introducido
+     *
+     * @return
+     */
     public double getPrecioLimiteJTextField() {
         return Double.parseDouble(this.precioLimiteJTextField.getText());
     }
-    
-    public void setPrecioLimiteJTextField(double precio){
+
+    /**
+     * Set donde se establece el precio límite
+     *
+     * @param precio
+     */
+    public void setPrecioLimiteJTextField(double precio) {
         this.precioLimiteJTextField.setText(Double.toString(precio));
     }
-    
-    public double getCantidadJTextField(){
+
+    /**
+     * Get que devuelve la cantidad introducida
+     *
+     * @return
+     */
+    public double getCantidadJTextField() {
         return Double.parseDouble(this.cantidadJTextField.getText());
     }
 
-    public void setCantidadJTextField(double cantidad){
+    /**
+     * Set donde se establece la cantidad
+     *
+     * @param cantidad
+     */
+    public void setCantidadJTextField(double cantidad) {
         this.cantidadJTextField.setText(Double.toString(cantidad));
     }
-    
-    public void addGuardarJButtonActionListener(ActionListener al){
+
+    /**
+     * Método para añadir ActionListener al botón Guardar
+     *
+     * @param al
+     */
+    public void addGuardarJButtonActionListener(ActionListener al) {
         this.guardarJButton.addActionListener(al);
     }
-    
-    public void addCancelarJButtonActionListener(ActionListener al){
+
+    /**
+     * Método para añadir ActionListener al botón Cancelar
+     *
+     * @param al
+     */
+    public void addCancelarJButtonActionListener(ActionListener al) {
         this.cancelarJButton.addActionListener(al);
     }
-    
-    public JComboBox<String> getAgentsJCombobox(){
+
+    /**
+     * Get que devuelve el ComboBox de agentes
+     *
+     * @return
+     */
+    public JComboBox<String> getAgentsJCombobox() {
         return this.agentJComboBox;
     }
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> agentJComboBox;
     private javax.swing.JButton cancelarJButton;
